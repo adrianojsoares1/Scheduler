@@ -1,8 +1,10 @@
+package src.Process;
+
 public abstract class Process {
 
     public String ID;				// unique—suggest appending integer to ‘P’
-    public int CPUTime, blockedTime,
-            readyTime, lastEventTime;	// all initialized to 0
+    public int CPUTime, blockedTime;
+    public int readyTime, lastEventTime;	// all initialized to 0
     public int finishTime;			// initialized to MAXINT
     public Resource nextBlock;		// NULL if no block
     public int nextBlockTime;		// set to MAXINT if no future block
@@ -18,10 +20,10 @@ public abstract class Process {
         blockedTime += time - lastEventTime;
     }
     public void updateReady (int time) {
-
+        readyTime += time;
     }
     public void updateCPU (int time) {
-
+        blockedTime += lastEventTime;
     }
     public abstract void generateNextBlock ( );
 }
