@@ -1,0 +1,11 @@
+class ProcessIV extends Process {
+
+    public ProcessRunTime() {
+        int runTime = 0;
+        int min = 400;
+        int max = 1000;
+        runTime = RNG1.RNG(min, max);
+
+        setFinishTime(runTime);
+    }
+}

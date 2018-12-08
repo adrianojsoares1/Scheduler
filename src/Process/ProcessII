@@ -1,0 +1,10 @@
+class ProcessII extends Process {
+
+    public ProcessRunTime() {
+        int runTime = 0;
+        int num = RNG1.RNG_float();
+        runTime = Math.ceil(200 + 400 * num.pow(5 / 3));
+
+        setFinishTime(runTime);
+    }
+}
