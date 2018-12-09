@@ -1,4 +1,5 @@
-package src.Process;
+package Process;
+import Resource.Resource;
 
 public abstract class Process {
 

@@ -1,4 +1,7 @@
-public abstract class Block {
+package Process;
+import Resource.Resource;
+
+public class Block {
     private int blockStartTime;
     private Resource blockResource;
     private int blockLength;
@@ -13,7 +16,7 @@ public abstract class Block {
         return blockStartTime;
     }
 
-    public BlockA setBlockStartTime(int blockStartTime) {
+    public Block setBlockStartTime(int blockStartTime) {
         this.blockStartTime = blockStartTime;
         return this;
     }
@@ -22,7 +25,7 @@ public abstract class Block {
         return blockResource;
     }
 
-    public BlockA setBlockResource(Resource blockResource) {
+    public Block setBlockResource(Resource blockResource) {
         this.blockResource = blockResource;
         return this;
     }
@@ -31,7 +34,7 @@ public abstract class Block {
         return blockLength;
     }
 
-    public BlockA setBlockLength(int blockLength) {
+    public Block setBlockLength(int blockLength) {
         this.blockLength = blockLength;
         return this;
     }

@@ -1,5 +1,7 @@
-package src.Process;
+package Process;
 import java.lang.Math;
+import Utilities.RNG;
+import Resource.Resource;
 
 public final class ProcessGenerator {
     static int ProcessRunTime;

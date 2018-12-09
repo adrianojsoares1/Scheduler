@@ -1,4 +1,4 @@
-package src.Process;
+package Utilities;
 import java.util.Random;
 public class RNG {
     static Random RNG = new Random();

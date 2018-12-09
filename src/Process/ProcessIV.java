@@ -1,4 +1,6 @@
-package src.Process;
+package Process;
+import Utilities.RNG;
+
 class ProcessIV extends Process {
 
     public void ProcessRunTime() {
