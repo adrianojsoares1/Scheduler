@@ -1,2 +1,1 @@
-class BlockB extends Block {
-}
+class BlockB extends Block {}

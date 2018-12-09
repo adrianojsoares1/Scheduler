@@ -3,7 +3,7 @@ public abstract class Block {
     private Resource blockResource;
     private int blockLength;
 
-    public Block(int startTime, int length, Resource block){
+    public Block(int startTime, int length, Resource block) {
         this.blockStartTime = startTime;
         this.blockLength = length;
         this.blockResource = block;
