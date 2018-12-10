@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Scheduler{
     private int globalTime;
-    private Queue readyQueue;
+    private IQueue readyQueue;
     private Process activeProcess;
     private List<Resource> resources;
     private Resource nextUnblockResource;

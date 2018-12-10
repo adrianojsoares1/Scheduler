@@ -9,10 +9,12 @@ public abstract class Process {
     private int finishTime;			// initialized to MAXINT
     private Resource nextBlock;		// NULL if no block
     private int nextBlockTime;		// set to MAXINT if no future block
+    private int nextBlockStartTime;
     private int blockServiceTime;		// set when process arrives at resource, else 0
     private int serviceStartTime;		// used to update blockedTime and for SharedResource
     private float fPriority;
     private int iPriority;
+    private char blockType = 0;
 
     public String toString ( ) {
         return ID;
@@ -25,6 +27,24 @@ public abstract class Process {
     }
     public void updateCPU (int time) {
         blockedTime += lastEventTime;
+    }
+
+    public Process setNextBlockStartTime(int time){
+        this.nextBlockStartTime = time;
+        return this;
+    }
+
+    public int getNextBlockStartTime(){
+        return this.nextBlockStartTime;
+    }
+
+    public Process setBlockType(char type){
+        this.blockType = type;
+        return this;
+    }
+
+    public char getBlockType(){
+        return this.blockType;
     }
 
     public String getID() {
