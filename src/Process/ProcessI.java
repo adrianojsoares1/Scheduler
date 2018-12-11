@@ -6,16 +6,25 @@ class ProcessI extends Process {
 
     public void ProcessRunTime() {
         setFinishTime(RNG.RNG_Min(25, 75));
-        setBlockType(RNG.RNG_Max(100) < 60 ? 'A' : 'B');
-        if(getBlockType() != 0)
+
+        //Only a 40% chance to block
+        if(RNG.RNG_Max(10) < 4)
             generateNextBlock();
     }
 
     public void generateNextBlock() {
+        //Determine the block start time
         int blockStart = RNG.RNG_Min(2, getFinishTime() - 1);
-        int blockLength = RNG.RNG_Min(60, 100);
 
-        Resource newResource = getBlockType() == 'A' ? new ResourceA() : new ResourceB();
+        //Determine Resource Type (A or B) and create the Resource (50% : 50%)
+        int type = RNG.RNG_Max(100) + 1;
+        Resource generatedBlock = type > 50 ? new ResourceA() : new ResourceB();
+
+        //Determine the block length
+        int blockLength = generatedBlock.generateBlockTime();
+
+        //Update the instance variables
+        setNextBlock(generatedBlock);
         setNextBlockStartTime(blockStart);
         setNextBlockTime(blockStart);
     }

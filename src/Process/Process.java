@@ -29,6 +29,8 @@ public abstract class Process {
         blockedTime += lastEventTime;
     }
 
+    public abstract void generateNextBlock ( );
+
     public Process setNextBlockStartTime(int time){
         this.nextBlockStartTime = time;
         return this;
@@ -154,7 +156,4 @@ public abstract class Process {
         this.iPriority = iPriority;
         return this;
     }
-
-    public abstract void generateNextBlock ( );
-
 }
