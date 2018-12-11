@@ -8,15 +8,15 @@ class ProcessIII extends Process {
 
     private LinkedList<Block> blocks = new LinkedList<>();
 
-    public void ProcessRunTime() {
+    public ProcessIII(Resource A, Resource B, Resource C){
         int runTime = (int) Math.ceil(150 + 350 * Math.sqrt(Math.pow(RNG.RNG_Float(), 5)));
         setFinishTime(runTime);
 
-        generateNextBlock();
+        generateNextBlock(A, B, C);
     }
 
     @Override
-    public void generateNextBlock(){
+    public void generateNextBlock(Resource A, Resource B, Resource C){
         int start = 0, end = getFinishTime() - 1;
         int type, blockStart, blockLength;
         while(start <= end){
@@ -25,9 +25,7 @@ class ProcessIII extends Process {
             start += (int)Math.ceil(25 + 50 * Math.cbrt(Math.pow(RNG.RNG_Float(), 7)));
 
             //Determine the type of the Block(15% : 50% : 35%)
-            Resource generatedBlock = type > 85 ?
-                    new ResourceC() : type > 35 ?
-                    new ResourceB() : new ResourceA();
+            Resource generatedBlock = type > 85 ? C : type > 35 ? B : A;
 
             blockLength = generatedBlock.generateBlockTime();
 
@@ -36,8 +34,8 @@ class ProcessIII extends Process {
         //Set instance variables for the next block - the first in the list
         Block firstBlock = this.blocks.peekFirst();
 
-        setNextBlock(firstBlock.getBlockResource());
-        setNextBlockStartTime(firstBlock.getBlockStartTime());
+        setNextBlock(firstBlock.getBlockResource()).
+        setNextBlockStartTime(firstBlock.getBlockStartTime()).
         setNextBlockTime(firstBlock.getBlockLength());
     }
 }

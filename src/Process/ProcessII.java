@@ -1,9 +1,10 @@
 package Process;
 import Utilities.RNG;
+import Resource.Resource;
 
 class ProcessII extends Process {
 
-    public void ProcessRunTime() {
+    public ProcessII() {
         int runTime = (int) Math.ceil(200 + 400 * Math.cbrt(Math.pow(RNG.RNG_Float(), 5)));
         setFinishTime(runTime);
 
@@ -12,7 +13,8 @@ class ProcessII extends Process {
         setNextBlockTime(0);
     }
 
-    public void generateNextBlock() {
+    @Override
+    public void generateNextBlock(Resource A, Resource B, Resource C) {
         //No blocks!
     }
 }

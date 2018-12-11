@@ -14,11 +14,7 @@ public abstract class Process {
     private int serviceStartTime;		// used to update blockedTime and for SharedResource
     private float fPriority;
     private int iPriority;
-    private char blockType = 0;
 
-    public String toString ( ) {
-        return ID;
-    }
     public void updateBlocked (int time) {
         blockedTime += time - lastEventTime;
     }
@@ -29,7 +25,7 @@ public abstract class Process {
         blockedTime += lastEventTime;
     }
 
-    public abstract void generateNextBlock ( );
+    public abstract void generateNextBlock (Resource A, Resource B, Resource C);
 
     public Process setNextBlockStartTime(int time){
         this.nextBlockStartTime = time;
@@ -38,15 +34,6 @@ public abstract class Process {
 
     public int getNextBlockStartTime(){
         return this.nextBlockStartTime;
-    }
-
-    public Process setBlockType(char type){
-        this.blockType = type;
-        return this;
-    }
-
-    public char getBlockType(){
-        return this.blockType;
     }
 
     public String getID() {
