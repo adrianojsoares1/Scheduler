@@ -37,7 +37,7 @@ public class WorksetGenerator {
 
     public void initProcesses() {
         int number = RNG.RNG_Min(3, 8);
-        for(int i = 0; i <= number; i++) {
+        for(int i = 0; i < number; i++) {
             processList.add(createdProcess());
             totalProcessTime += processList.get(i).getFinishTime();
         }
