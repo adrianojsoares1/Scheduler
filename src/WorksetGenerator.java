@@ -20,16 +20,16 @@ public class WorksetGenerator {
         int number = RNG.RNG_Max(100);
 
         if (number < 49) {
-            theProcess = new ProcessI(A, C);
+            theProcess = new ProcessI();
         }
         else if (number < 79) {
             theProcess = new ProcessII();
         }
         else if (number < 96) {
-            theProcess = new ProcessIII(A, B, C);
+            theProcess = new ProcessIII();
         }
         else{
-            theProcess = new ProcessIV(B, C);
+            theProcess = new ProcessIV();
         }
         return theProcess;
     }

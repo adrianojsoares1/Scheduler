@@ -17,7 +17,7 @@ public class Scheduler{
         nextEvent = Math.min(nextArrival, Math.min(nextExit, Math.min(nextTimeOut, nextUnblock)));
     }
 
-    private void updateNextUnblock(int block, Resource resource){
+    public void updateNextUnblock(int block, Resource resource){
         if(nextUnblock < block){
             nextUnblock = block;
             nextUnblockResource = resource;

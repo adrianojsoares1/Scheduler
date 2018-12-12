@@ -30,7 +30,7 @@ public abstract class Resource{
             nextUnblockTime = 25000;
             servingProcess = null;
         }
-        Scheduler.insertReadyList (servingProcess);
+        Scheduler.addToReadyQueue (servingProcess);
         Scheduler.updateNextUnblock (nextUnblockTime, this);	// this identifies the resource
     }
 
