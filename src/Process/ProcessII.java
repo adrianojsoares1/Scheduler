@@ -2,7 +2,7 @@ package Process;
 import Utilities.RNG;
 import Resource.Resource;
 
-class ProcessII extends Process {
+public class ProcessII extends Process {
 
     public ProcessII() {
         int runTime = (int) Math.ceil(200 + 400 * Math.cbrt(Math.pow(RNG.RNG_Float(), 5)));

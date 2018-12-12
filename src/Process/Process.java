@@ -14,6 +14,7 @@ public abstract class Process {
     private int serviceStartTime;		// used to update blockedTime and for SharedResource
     private float fPriority;
     private int iPriority;
+    private int arrivalTime;
 
     public void updateBlocked (int time) {
         blockedTime += time - lastEventTime;
@@ -78,6 +79,15 @@ public abstract class Process {
 
     public Process setLastEventTime(int lastEventTime) {
         this.lastEventTime = lastEventTime;
+        return this;
+    }
+
+    public int getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public Process setArrivalTime(int arrivalTime) {
+        this.arrivalTime = arrivalTime;
         return this;
     }
 

@@ -4,7 +4,7 @@ import Resource.*;
 import Utilities.RNG;
 import java.util.LinkedList;
 
-class ProcessIII extends Process {
+public class ProcessIII extends Process {
 
     private LinkedList<Block> blocks = new LinkedList<>();
 

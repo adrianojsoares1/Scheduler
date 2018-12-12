@@ -2,7 +2,7 @@ package Process;
 import Utilities.RNG;
 import Resource.*;
 
-class ProcessI extends Process {
+public class ProcessI extends Process {
 
     public ProcessI(Resource A, Resource B){
         setFinishTime(RNG.RNG_Min(25, 75));
