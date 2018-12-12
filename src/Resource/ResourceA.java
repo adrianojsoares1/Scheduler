@@ -1,14 +1,17 @@
 package Resource;
 import Process.Process;
 import Utilities.RNG;
+import Scheduler.Scheduler;
+
+import java.util.ArrayList;
 
 public class ResourceA extends Resource {
 
     public void finishService ( ) {
-        Process theProcess = blockedProcesses.getMinTimeProcess ( );
+        Process theProcess = getMinTimeProcess(blockedProcesses);
         blockedProcesses.remove(0);
-        blockedProcesses.updateServiceTimes (theProcess.getBlockedTime());
-        nextUnblockTime = nextUnblockTime + theProcess.serviceTime;
+        updateServiceTimes (blockedProcesses, theProcess.getBlockedTime());
+        nextUnblockTime = (nextUnblockTime + theProcess.getBlockedTime());
         Scheduler.insertReadyList (servingProcess);
         servingProcess = theProcess;
         Scheduler.updateNextUnblock (nextUnblockTime, this);	// this identifies the resource
@@ -20,28 +23,37 @@ public class ResourceA extends Resource {
         int elapsedTime = (time - servingProcess.getServiceStartTime());
         if (theProcess.getServiceStartTime() < servingProcess.getServiceStartTime() - elapsedTime) {
             blockedProcesses.add(servingProcess);
-            blockedProcesses.updateServiceTimes (time - servingProcess.getServiceStartTime());
+            updateServiceTimes (blockedProcesses, time - servingProcess.getServiceStartTime());
             servingProcess = theProcess;
             nextUnblockTime = time + theProcess.getBlockedTime();
             Scheduler.updateNextUnblock (nextUnblockTime, this);
         }
     }
-
-    public void updateServiceTimes (int time) {
+    private void updateServiceTimes (ArrayList<Process> blockedProcesses, int time) {
         // for each process in blockedProcesses
         // add time to its blockedTime
         // subtract time from serviceTime
+        for (Process p : blockedProcesses){
+            p.setBlockedTime(p.getBlockedTime() + time);
+        }
+
     }
-
-
+    public Process getMinTimeProcess (ArrayList<Process> blockedProcesses){
+        Process low = blockedProcesses.get(0);
+        for (int i = 1; i < blockedProcesses.size(); i++){
+            if (blockedProcesses.get(i).getBlockedTime() < low.getBlockedTime()){
+                low = blockedProcesses.get(i);
+            }
+        }
+        return(low);
+    }
     public void updateNextUnblock(int time) {
-
-    }
-    public void arrivingProcess(Process theProcess) {
-
+        nextUnblockTime += time;
     }
 
     public int generateBlockTime(){
         return RNG.RNG_Min(60,100);
     }
+
+
 }
