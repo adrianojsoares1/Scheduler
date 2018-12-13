@@ -11,20 +11,48 @@ public class FCFS extends Scheduler {
         super(processes, resources, new LinkedList<Process>());
     }
 
-
     @Override
-    void updatePriorities(int byTime) {
-
-    }
-
-    @Override
-    void runScheduler() {
-
-    }
+    void updatePriorities(int byTime) { return; }
 
     @Override
     void addToReadyQueue(Process process) {
-
+		getReadyQueue().add(process.setArrivalTime(getGlobalTime()));
+    }
+	
+	@Override
+	void handleNextEvent(){
+		switch(getNextEvent()){
+			case getNextArrival():{
+				
+			} break;
+			case getNextEvent():{
+				
+			} break;
+			case getNextExit():{
+				
+			} break;
+			case getNextTimeout():{
+				
+			} break;
+			default:{
+				
+			}
+		}
+	}
+	 
+	@Override
+    void runScheduler() {
+		//First Process
+		setActiveProcess(getReadyQueue().poll());
+		setNextExit(getActiveProcess().getFinishTime());
+		
+		while(getNextEvent() != Integer.MAX_INT){
+			
+			updateEvent();
+			handleNextEvent();
+			
+			setGlobalTime(getGlobalTime() + QUANTUM);
+		}
     }
 
 }

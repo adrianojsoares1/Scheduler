@@ -5,25 +5,40 @@ import Process.Process;
 import java.util.Queue;
 
 public abstract class Scheduler {
+	public final int QUANTUM = 40; //ticks
+	
     private int globalTime;
-    private java.util.Queue readyQueue;
+    private Queue readyQueue;
     private Process activeProcess;
     private Resource[] resources;
+	private Process[] processes;
     private Resource nextUnblockResource;
     private int nextArrival, nextExit, nextTimeOut, nextUnblock, nextEvent;
     private int activeTime, idleTime, overheadTime;
-
+	
     public Scheduler(Process[] processes, Resource[] resources, Queue readyQueue){
         this.resources = resources;
         this.readyQueue = readyQueue;
-
-        int startingAmt = Math.min(RNG.RNG_Min(3, 8), processes.length);
-        for(int i = 0; i < startingAmt; i++){
-            Process intermediate = processes[i];
-            intermediate.setArrivalTime(0);
-
-
-        }
+		this.processes = processes;
+		
+		this.nextArrival = Integer.MAX_INT;
+		this.nextExit = Integer.MAX_INT;
+		this.nextTimeOut = Integer.MAX_INT;
+		this.nextUnblock = Integer.MAX_INT;
+		
+		this.globalTime = 1;
+		this.nextEvent = 0;
+		
+        for(Process process : this.processes){
+			if(process.getArrivalTime() == 0){
+				readyQueue.add(process);
+			}
+			else {
+				nextArrival = process.getArrivalTime();
+				break;
+			}	
+		}
+	
     }
 
     public Scheduler updateActiveTime(int byTime) {
@@ -42,7 +57,7 @@ public abstract class Scheduler {
     }
 
     public Scheduler updateNextEvent() {
-        nextEvent = Math.min(nextArrival, Math.min(nextExit, Math.min(nextTimeOut, nextUnblock)));
+        nextEvent = Math.min(nextArrival, Math.min(nextExit, Math.min(nextTimeOut, Math.min(activeProcess.getNextBlockStartTime(), nextUnblock))));
         return this;
     }
 
@@ -55,32 +70,18 @@ public abstract class Scheduler {
         return false;
     }
 
-    public Scheduler handleEvent() {
-        if (nextEvent == nextUnblock) {
-            nextUnblockResource.finishService();
-            updateNextEvent();
-        } else if (nextEvent == nextArrival) {
-
-        } else if (nextEvent == nextExit) {
-
-        } else {
-
-        }
-
-        return this;
-    }
+    public abstract handleEvent();
+	
+	void generateNextArrival(){
+		
+	}
 
     abstract void updatePriorities(int byTime);
 
     abstract void addToReadyQueue(Process process);
 
     abstract void runScheduler();
-
-    public void scheduleNextProcess(int byTime){
-
-    }
-
-
+	
 
     //Setters and Getters
 
