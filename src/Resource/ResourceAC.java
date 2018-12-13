@@ -18,7 +18,7 @@ public abstract class ResourceAC extends Resource {
     public void arrivingProcess (Process theProcess, int time) {
         super.arrivingProcess (theProcess, time);	// executes method of Resource
 
-        int elapsedTime = (time - servingProcess.getServiceStartTime());
+        int elapsedTime = (time  servingProcess.getServiceStartTime());
         if (theProcess.getServiceStartTime() < servingProcess.getServiceStartTime() - elapsedTime) {
             blockedProcesses.add(servingProcess);
             updateServiceTimes (blockedProcesses, time - servingProcess.getServiceStartTime());

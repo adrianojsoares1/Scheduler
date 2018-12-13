@@ -5,8 +5,6 @@ import java.util.LinkedList;
 
 public class ProcessIV extends Process {
 
-    private LinkedList<Block> blocks = new LinkedList<>();
-
     public ProcessIV(Resource B, Resource C) {
         setFinishTime(RNG.RNG_Min(400, 1000));
 

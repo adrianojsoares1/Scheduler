@@ -18,4 +18,7 @@ public class Queue<T> implements IQueue<T>{
     public T poll() {
         return elements.poll();
     }
+
+    @Override
+    public int size() {return elements.size(); }
 }

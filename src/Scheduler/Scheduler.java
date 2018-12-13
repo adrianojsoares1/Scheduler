@@ -2,39 +2,40 @@ package Scheduler;
 import Resource.*;
 import Utilities.*;
 import Process.Process;
-import java.util.Queue;
+
+import java.util.LinkedList;
 
 public abstract class Scheduler {
 	public final int QUANTUM = 40; //ticks
 	
     private int globalTime;
-    private Queue readyQueue;
+    private IQueue<Process> readyQueue;
     private Process activeProcess;
     private Resource[] resources;
-	private Process[] processes;
+	private LinkedList<Process> processes;
     private Resource nextUnblockResource;
     private int nextArrival, nextExit, nextTimeOut, nextUnblock, nextEvent;
     private int activeTime, idleTime, overheadTime;
 	
-    public Scheduler(Process[] processes, Resource[] resources, Queue readyQueue){
+    public Scheduler(LinkedList<Process> processes, Resource[] resources, IQueue<Process> readyQueue){
         this.resources = resources;
         this.readyQueue = readyQueue;
 		this.processes = processes;
 		
-		this.nextArrival = Integer.MAX_INT;
-		this.nextExit = Integer.MAX_INT;
-		this.nextTimeOut = Integer.MAX_INT;
-		this.nextUnblock = Integer.MAX_INT;
+		this.nextArrival = Integer.MAX_VALUE;
+		this.nextExit = Integer.MAX_VALUE;
+		this.nextTimeOut = Integer.MAX_VALUE;
+		this.nextUnblock = Integer.MAX_VALUE;
 		
 		this.globalTime = 1;
 		this.nextEvent = 0;
 		
-        for(Process process : this.processes){
-			if(process.getArrivalTime() == 0){
-				readyQueue.add(process);
+        for(int i = 0; i < processes.size(); i++){
+			if(processes.peek().getArrivalTime() == 0){
+				readyQueue.add(processes.pop());
 			}
 			else {
-				nextArrival = process.getArrivalTime();
+				nextArrival = processes.peek().getArrivalTime();
 				break;
 			}	
 		}
@@ -55,13 +56,18 @@ public abstract class Scheduler {
         overheadTime += byTime;
         return this;
     }
+	
+	public Scheduler updateGlobalTime(int byTime){
+		globalTime += byTime;
+		return this;
+	}
 
     public Scheduler updateNextEvent() {
         nextEvent = Math.min(nextArrival, Math.min(nextExit, Math.min(nextTimeOut, Math.min(activeProcess.getNextBlockStartTime(), nextUnblock))));
         return this;
     }
 
-    private boolean updateNextUnblock(int block, Resource resource) {
+    public boolean updateNextUnblock(int block, Resource resource) {
         if (nextUnblock < block) {
             nextUnblock = block;
             nextUnblockResource = resource;
@@ -70,7 +76,15 @@ public abstract class Scheduler {
         return false;
     }
 
-    public abstract handleEvent();
+    public LinkedList<Process> getProcesses() {
+        return processes;
+    }
+
+    public void setProcesses(LinkedList<Process> processes) {
+        this.processes = processes;
+    }
+
+    public abstract void handleEvent();
 	
 	void generateNextArrival(){
 		
@@ -94,7 +108,7 @@ public abstract class Scheduler {
         return this;
     }
 
-    public Queue getReadyQueue() {
+    public IQueue<Process> getReadyQueue() {
         return readyQueue;
     }
 

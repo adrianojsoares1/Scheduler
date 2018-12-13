@@ -1,7 +1,11 @@
 package Process;
 import Resource.Resource;
 
+import java.util.LinkedList;
+
 public abstract class Process {
+
+    public LinkedList<Block> blocks = new LinkedList<>();
 
     private String ID;				// unique—suggest appending integer to ‘P’
     private int CPUTime, blockedTime;

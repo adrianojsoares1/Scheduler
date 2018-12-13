@@ -6,8 +6,6 @@ import java.util.LinkedList;
 
 public class ProcessIII extends Process {
 
-    private LinkedList<Block> blocks = new LinkedList<>();
-
     public ProcessIII(Resource A, Resource B, Resource C){
         int runTime = (int) Math.ceil(150 + 350 * Math.sqrt(Math.pow(RNG.RNG_Float(), 5)));
         setFinishTime(runTime);
