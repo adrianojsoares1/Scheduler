@@ -30,8 +30,8 @@ public abstract class Resource{
             nextUnblockTime = 25000;
             servingProcess = null;
         }
-        Scheduler.addToReadyQueue (servingProcess);
-        Scheduler.updateNextUnblock (nextUnblockTime, this);	// this identifies the resource
+        //Scheduler.addToReadyQueue (servingProcess);
+        //Scheduler.updateNextUnblock (nextUnblockTime, this);	// this identifies the resource
     }
 
     public void arrivingProcess (Process theProcess, int time) {
@@ -41,12 +41,13 @@ public abstract class Resource{
             theProcess.setNextBlockStartTime(time);
             updateIdleTime (time - idleTime);
             nextUnblockTime = time + theProcess.getBlockedTime();
-            Scheduler.updateNextUnblock (this.nextUnblockTime);
+            //Scheduler.updateNextUnblock (this.nextUnblockTime);
         }
         else {
             blockedProcesses.add(theProcess);
         }
     }
+
 
     public void updateActiveTime (int time) {
         this.activeTime += time;

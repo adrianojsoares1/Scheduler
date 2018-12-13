@@ -10,21 +10,21 @@ public abstract class ResourceAC extends Resource {
         blockedProcesses.remove(0);
         updateServiceTimes (blockedProcesses, theProcess.getBlockedTime());
         nextUnblockTime = (nextUnblockTime + theProcess.getBlockedTime());
-        Scheduler.addToReadyQueue (servingProcess);
+        //Scheduler.addToReadyQueue (servingProcess);
         servingProcess = theProcess;
-        Scheduler.updateNextUnblock (nextUnblockTime, this);	// this identifies the resource
+        //Scheduler.updateNextUnblock (nextUnblockTime, this);	// this identifies the resource
     }
 
     public void arrivingProcess (Process theProcess, int time) {
         super.arrivingProcess (theProcess, time);	// executes method of Resource
 
-        int elapsedTime = (time  servingProcess.getServiceStartTime());
+        int elapsedTime = (time - servingProcess.getServiceStartTime());
         if (theProcess.getServiceStartTime() < servingProcess.getServiceStartTime() - elapsedTime) {
             blockedProcesses.add(servingProcess);
             updateServiceTimes (blockedProcesses, time - servingProcess.getServiceStartTime());
             servingProcess = theProcess;
             nextUnblockTime = time + theProcess.getBlockedTime();
-            Scheduler.updateNextUnblock (nextUnblockTime, this);
+            //Scheduler.updateNextUnblock (nextUnblockTime, this);
         }
     }
     private void updateServiceTimes (ArrayList<Process> blockedProcesses, int time) {

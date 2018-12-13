@@ -19,9 +19,10 @@ public class PriorityQueue {
         ids = new ArrayList<>();
         heap = new ArrayList<>();
 
-        for(int i : args)
-            insert(i);
+     //   for(int i : args)
+   //         insert(i);
     }
+    /*
     //If theres a hole, replace process x from null with a new Process
     void insert(Integer i) {
         boolean found_hole = false;
@@ -203,4 +204,5 @@ public class PriorityQueue {
         heap_up(ids.get(id));
         heap_down(ids.get(id));
     }
+    */
 }
