@@ -9,13 +9,13 @@ b. Implementation: The language we had used for this project was Java. The struc
 * **RNG:** Has the three methods to determine the random number manipulation.
 
 c. Class and Methods:
-* Classes
- * ___
- * ___
+* Classes:
+ * Resource
+ * Scheduler
+ * Block
+ * Process
 * Methods or Functions used:
- * ____
- * ____
-
+ * A lot
 d. Description (Process Set Generation and Core of Scheduling Algorithm)
 * **Process Set Generation:** A Process is made and creates resource A, B, or C. A number within the code is randomly generated out of 100 in order to determine will process will be created.
 * Based on Percent Distribution:
@@ -71,3 +71,4 @@ f. Description (User Interface, Results of a Scheduling Run, How Results are Com
  * Created Github Repository
  * Resource Class
  * Useful Discussion
+ * Worked to support every other member
