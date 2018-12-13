@@ -9,7 +9,6 @@ import Process.ProcessIV;
 
 
 public class WorksetGenerator {
-    private int maxInt = 25000; //this is a number
     private ArrayList<Process> processList = new ArrayList<Process>();
     private ResourceA A = new ResourceA();
     private ResourceB B = new ResourceB();
@@ -17,7 +16,7 @@ public class WorksetGenerator {
     private int totalProcessTime = 0; //this is a number
 
     private Process createdProcess(){
-        Process theProcess = null;
+        Process theProcess;
         int number = RNG.RNG_Max(100);
 
         if (number < 49) {
@@ -45,7 +44,7 @@ public class WorksetGenerator {
 
     public void restProcesses(){
         int i = 0;
-        while(maxInt > totalProcessTime) {
+        while(25000 > totalProcessTime) {
             processList.add(createdProcess());
             totalProcessTime += processList.get(i).getFinishTime();
             i ++;

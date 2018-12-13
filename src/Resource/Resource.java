@@ -1,8 +1,6 @@
 package Resource;
 import Scheduler.Scheduler;
 import Process.Process;
-import Process.*;
-
 import java.util.ArrayList;
 
 public abstract class Resource{
@@ -11,17 +9,16 @@ public abstract class Resource{
     protected int nextUnblockTime;
     private int activeTime, idleTime;
     public ArrayList<Process> blockedProcesses;
-    public Process servingProcess;
+    protected Process servingProcess;
 
     public abstract void updateNextUnblock (int time );
-    public abstract void arrivingProcess (Process theProcess);
 
     public void finishService ( ) {
         int oldTime = nextUnblockTime;		// current process finish time—for legibility
         Process oldProcess = servingProcess;
 
         updateActiveTime (oldProcess.getBlockedTime());
-        if (blockedProcesses.isEmpty()) {
+        if (!blockedProcesses.isEmpty()) {
             Process theProcess = blockedProcesses.remove(0);
             nextUnblockTime = oldTime + theProcess.getBlockedTime();
             servingProcess = theProcess;
@@ -33,7 +30,7 @@ public abstract class Resource{
             nextUnblockTime = 25000;
             servingProcess = null;
         }
-        Scheduler.insertReadyList (servingProcess);
+        Scheduler.addToReadyQueue (servingProcess);
         Scheduler.updateNextUnblock (nextUnblockTime, this);	// this identifies the resource
     }
 
@@ -44,7 +41,7 @@ public abstract class Resource{
             theProcess.setNextBlockStartTime(time);
             updateIdleTime (time - idleTime);
             nextUnblockTime = time + theProcess.getBlockedTime();
-            Scheduler.updateNextUnblock (nextUnblockTime, this);
+            Scheduler.updateNextUnblock (this.nextUnblockTime);
         }
         else {
             blockedProcesses.add(theProcess);
@@ -58,9 +55,9 @@ public abstract class Resource{
         this.idleTime += time;
     }
 
-    public abstract void arrivingProcess(java.lang.Process theProcess);
-
     public abstract int generateBlockTime();
 
-
+    public String getId(){
+        return(this.id);
+    }
 }

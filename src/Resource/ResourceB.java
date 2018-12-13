@@ -8,4 +8,8 @@ public class ResourceB extends Resource{
     public int generateBlockTime(){
         return RNG.RNG_Min(75, 125);
     }
+
+    public void updateNextUnblock(int time) {
+        nextUnblockTime += time;
+    }
 }
