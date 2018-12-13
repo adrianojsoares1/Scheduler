@@ -1,7 +1,7 @@
 ## Documentation
 #### Description
 
-a. Purpose: The purpose of this application is ______.
+a. Purpose: The purpose of this application is simulate multiple algorithims for blocking.
 
 b. Implementation: The language we had used for this project was Java. The structure was Process, Block, RNG.
 * **Process:** Looks at Processes which looks at the multiple processes (1, 2, 3, 4),  process run time, the time the process time finishes using the RNG class.
