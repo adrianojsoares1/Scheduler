@@ -45,7 +45,6 @@ f. Description (User Interface, Results of a Scheduling Run, How Results are Com
  **Josh**
  * RNG Class
  * Workset Generation
- * Process Class
  * Block Class
  * Documentation
  * Presentation
@@ -57,18 +56,20 @@ f. Description (User Interface, Results of a Scheduling Run, How Results are Com
  * Resource Class
  * RNG Class
  * Process Class
- * Block Class
+ * Resource Class
+ * Workset Generation
  * Useful Discussion
 
  **Sarvesh**
- * Queue Class
  * Presentation
  * Documentation
  * Useful Discussion
  * Markdown
 
  **Adriano**
- * Created Github Repository
+ * Created and Managed Github Repository
  * Resource Class
- * Useful Discussion
+ * Process Class
+ * Scheduler Classes
+ * Queue Class and Interface
  * Worked to support every other member
